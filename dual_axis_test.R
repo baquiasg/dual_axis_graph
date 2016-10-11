@@ -1,3 +1,4 @@
+# Exemples of graphs obtained with the file dual_axis.R
 
 library(ggplot2)
 library(gtable)
@@ -5,7 +6,7 @@ library(grid)
 source("dual_axis.R")
 
 # ##########################
-# Number of russian bilionaires
+# Plot number of russian bilionaires
 # ##########################
 
 # Data
@@ -34,14 +35,14 @@ rus <- dat[,1:2]
 world <- dat[,-2]
 
 # Graph 1
-graph_1 <- ggplot(rus, aes(X, Russia)) + 
-  geom_line(colour = "#68382C", size = 1.5) + 
+graph_1 <- ggplot(rus, aes(X, Russia)) +
+  geom_line(colour = "#68382C", size = 1.5) +
   labs(x=NULL,y=NULL) +
   scale_x_continuous(breaks= c(1996, seq(2000,2015,5))) +
   scale_y_continuous(expand = c(0, 0), limits = c(0,200)) +
   theme(
     panel.background = element_blank(),
-    panel.grid.minor = element_blank(), 
+    panel.grid.minor = element_blank(),
     panel.grid.major = element_line(color = "gray50", size = 0.75),
     panel.grid.major.x = element_blank(),
     axis.text.y = element_text(colour="#68382C", size = 14),
@@ -50,16 +51,16 @@ graph_1 <- ggplot(rus, aes(X, Russia)) +
     axis.ticks.length = unit(.2, "cm"),
     axis.ticks.x = element_line(colour = "black"),
     axis.ticks.y = element_blank(),
-    plot.title = element_text(hjust = -0.135, vjust=2.12, colour="#68382C", size = 14)) 
+    plot.title = element_text(hjust = -0.135, vjust=2.12, colour="#68382C", size = 14))
 
 # Graph 2
-graph_2 <- ggplot(world, aes(X, World)) + 
-  geom_line(colour = "#00A4E6", size = 1.5) +  
+graph_2 <- ggplot(world, aes(X, World)) +
+  geom_line(colour = "#00A4E6", size = 1.5) +
   labs(x=NULL,y=NULL) +
   scale_y_continuous(expand = c(0, 0), limits = c(0,2000)) +
   theme(
     panel.background = element_blank(),
-    panel.grid.minor = element_blank(), 
+    panel.grid.minor = element_blank(),
     panel.grid.major = element_blank(),
     axis.text.y = element_text(colour="#00A4E6", size=14),
     axis.text.x = element_text(size=14),
@@ -71,11 +72,11 @@ graph_2 <- ggplot(world, aes(X, World)) +
 label_1 <- "Number in Russia"
 label_2 <- "Rest of the world"
 
-# Test
+# Plot
 dual_axis_graph(graph_1, graph_2, label_1, label_2)
 
 # ##########################
-# Number of bots in online bids
+# Plot number of bots in online bids
 # ##########################
 dat <- read.csv(text = "merchandise,total_bids,bot_bids,bids_bot_ratio
                       auto parts,9757,0,0
@@ -90,7 +91,7 @@ dat <- read.csv(text = "merchandise,total_bids,bot_bids,bids_bot_ratio
                 sporting goods,1855207,230326,12.4"
                 , header  = TRUE, sep = ',', strip.white = TRUE)
 
-graph_1 <- ggplot() + 
+graph_1 <- ggplot() +
   geom_bar(data = dat, aes(x = merchandise, y = total_bids), stat = "identity", fill = "#86898C") +
   ggtitle("Bids per product") +
   ylab("") +
@@ -109,4 +110,5 @@ graph_2 <- ggplot() +
   theme(panel.background = element_rect(fill = "#F47B16"))
 label_2 <- "Percentage of bots (%)"
 
+# Plot
 dual_axis_graph(graph_1, graph_2, label_1, label_2)
