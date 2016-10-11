@@ -147,7 +147,7 @@ labs = gTree("Labs", children = gList(left, right))
 
 # New row in the gtable for labels
 height = unit(3, "grobheight", left)
-g1 <- gtable_add_rows(g1, height, 2)  
+g1 <- gtable_add_rows(g1, height, 2)
 
 # Put the label in the new row
 g1 = gtable_add_grob(g1, labs, t=3, l=3, r=5)
@@ -155,6 +155,9 @@ g1 = gtable_add_grob(g1, labs, t=3, l=3, r=5)
 # Turn off clipping in the plot panel
 g1$layout[which(g1$layout$name == "panel"), ]$clip = "off"
 
+grid.draw(g1)
+
+
 # Print it to PDF
-ggsave("plot.pdf", g1, width=5, height=5)
+#ggsave("plot.pdf", g1, width=5, height=5)
 
